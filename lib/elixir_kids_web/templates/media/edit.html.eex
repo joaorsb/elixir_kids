@@ -1,0 +1,5 @@
+<h1>Edit Media</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.media_path(@conn, :update, @media)) %>
+
+<span><%= link "Back", to: Routes.media_path(@conn, :index) %></span>

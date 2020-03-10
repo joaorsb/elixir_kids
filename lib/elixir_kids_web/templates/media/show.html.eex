@@ -1,0 +1,23 @@
+<h1>Show Media</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @media.name %>
+  </li>
+
+  <li>
+    <strong>Post:</strong>
+    <%= @media.post_id %>
+  </li>
+
+  <li>
+    <strong>Type:</strong>
+    <%= @media.type %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.media_path(@conn, :edit, @media) %></span>
+<span><%= link "Back", to: Routes.media_path(@conn, :index) %></span>

@@ -1,0 +1,51 @@
+<%= form_for @changeset, @action, fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below.</p>
+    </div>
+  <% end %>
+
+  <%= label f, :title %>
+  <%= text_input f, :title %>
+  <%= error_tag f, :title %>
+
+  <%= label f, :description %>
+  <%= text_input f, :description %>
+  <%= error_tag f, :description %>
+
+  <%= label f, :address %>
+  <%= text_input f, :address %>
+  <%= error_tag f, :address %>
+
+  <%= label f, :image_name %>
+  <%= text_input f, :image_name %>
+  <%= error_tag f, :image_name %>
+
+  <%= label f, :lat %>
+  <%= number_input f, :lat, step: "any" %>
+  <%= error_tag f, :lat %>
+
+  <%= label f, :lng %>
+  <%= number_input f, :lng, step: "any" %>
+  <%= error_tag f, :lng %>
+
+  <%= label f, :neighborhood %>
+  <%= text_input f, :neighborhood %>
+  <%= error_tag f, :neighborhood %>
+
+  <%= label f, :site_url %>
+  <%= text_input f, :site_url %>
+  <%= error_tag f, :site_url %>
+
+  <%= label f, :language %>
+  <%= text_input f, :language %>
+  <%= error_tag f, :language %>
+
+  <%= label f, :category_id %>
+  <%= select f, :category_id, @categories  %>
+  <%= error_tag f, :category_id %>
+
+  <div>
+    <%= submit "Save" %>
+  </div>
+<% end %>

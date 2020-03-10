@@ -1,0 +1,30 @@
+<h1>Listing Medias</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Post</th>
+      <th>Type</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for media <- @medias do %>
+    <tr>
+      <td><%= media.name %></td>
+      <td><%= media.post_id %></td>
+      <td><%= media.type %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.media_path(@conn, :show, media) %></span>
+        <span><%= link "Edit", to: Routes.media_path(@conn, :edit, media) %></span>
+        <span><%= link "Delete", to: Routes.media_path(@conn, :delete, media), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Media", to: Routes.media_path(@conn, :new) %></span>
