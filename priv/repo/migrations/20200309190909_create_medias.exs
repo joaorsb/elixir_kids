@@ -6,7 +6,7 @@ defmodule ElixirKids.Repo.Migrations.CreateMedias do
       add :name, :string
       add :post_id, references(:posts)
       add :type, :string
-
+      add :main_photo, :boolean, default: false
 
       timestamps()
     end

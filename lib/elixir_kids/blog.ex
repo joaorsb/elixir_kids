@@ -35,6 +35,19 @@ defmodule ElixirKids.Blog do
   end
 
   @doc """
+  Returns the list of categories title and id by type.
+
+  ## Examples
+
+      iex> list_categories_select_by_type()
+      [%Category{}, ...]
+
+  """
+  def list_categories_select_by_type(type) do
+    Repo.all(from(c in Category, select: {c.title, c.id}, where: c.type == ^type))
+  end
+
+  @doc """
   Gets a single category.
 
   Raises `Ecto.NoResultsError` if the Category does not exist.
@@ -127,7 +140,20 @@ defmodule ElixirKids.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all from p in Post, preload: [:neighborhood, :category]
+  end
+
+  @doc """
+  Returns the ordered list of posts.
+
+  ## Examples
+
+      iex> list_posts_by_order(order_by)
+      [%Post{}, ...]
+
+  """
+  def list_posts_by_order(order_by) do
+    Repo.all from p in Post, order_by: ^order_by, preload: [:neighborhood, :category]
   end
 
   @doc """
@@ -305,5 +331,114 @@ defmodule ElixirKids.Blog do
   """
   def change_media(%Media{} = media) do
     Media.changeset(media, %{})
+  end
+
+  alias ElixirKids.Blog.Neighborhood
+
+  @doc """
+  Returns the list of neighborhoods.
+
+  ## Examples
+
+      iex> list_neighborhoods()
+      [%Neighborhood{}, ...]
+
+  """
+  def list_neighborhoods do
+    Repo.all(Neighborhood)
+  end
+
+  @doc """
+  Gets a single neighborhood.
+
+  Raises `Ecto.NoResultsError` if the Neighborhood does not exist.
+
+  ## Examples
+
+      iex> get_neighborhood!(123)
+      %Neighborhood{}
+
+      iex> get_neighborhood!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_neighborhood!(id), do: Repo.get!(Neighborhood, id)
+
+  @doc """
+  Creates a neighborhood.
+
+  ## Examples
+
+      iex> create_neighborhood(%{field: value})
+      {:ok, %Neighborhood{}}
+
+      iex> create_neighborhood(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_neighborhood(attrs \\ %{}) do
+    %Neighborhood{}
+    |> Neighborhood.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a neighborhood.
+
+  ## Examples
+
+      iex> update_neighborhood(neighborhood, %{field: new_value})
+      {:ok, %Neighborhood{}}
+
+      iex> update_neighborhood(neighborhood, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_neighborhood(%Neighborhood{} = neighborhood, attrs) do
+    neighborhood
+    |> Neighborhood.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a neighborhood.
+
+  ## Examples
+
+      iex> delete_neighborhood(neighborhood)
+      {:ok, %Neighborhood{}}
+
+      iex> delete_neighborhood(neighborhood)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_neighborhood(%Neighborhood{} = neighborhood) do
+    Repo.delete(neighborhood)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking neighborhood changes.
+
+  ## Examples
+
+      iex> change_neighborhood(neighborhood)
+      %Ecto.Changeset{source: %Neighborhood{}}
+
+  """
+  def change_neighborhood(%Neighborhood{} = neighborhood) do
+    Neighborhood.changeset(neighborhood, %{})
+  end
+
+  @doc """
+  Returns the list of neighborhoods name and id.
+
+  ## Examples
+
+      iex> list_neighborhoods_select()
+      [%Neighborhood{}, ...]
+
+  """
+  def list_neighborhoods_select do
+    Repo.all(from(n in Neighborhood, select: {n.name, n.id}))
   end
 end

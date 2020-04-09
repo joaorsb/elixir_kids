@@ -4,7 +4,7 @@ use Mix.Config
 config :elixir_kids, ElixirKids.Repo,
   username: "postgres",
   password: "postgres",
-  database: "elixir_kids_dev",
+  database: "ex-kids-postgres",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

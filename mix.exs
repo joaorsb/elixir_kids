@@ -20,7 +20,7 @@ defmodule ElixirKids.MixProject do
   def application do
     [
       mod: {ElixirKids.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :google_maps]
     ]
   end
 
@@ -45,7 +45,8 @@ defmodule ElixirKids.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.9.0"},
       {:floki, ">= 0.0.0", only: :test},
-      {:slugify, "~> 1.3"}
+      {:slugify, "~> 1.3"},
+      {:google_maps, "~> 0.11"}
     ]
   end
 

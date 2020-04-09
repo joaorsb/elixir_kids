@@ -4,6 +4,10 @@ defmodule ElixirKidsWeb.PostController do
   alias ElixirKids.Blog
   alias ElixirKids.Blog.Post
 
+  plug :load_categories when action in [:new, :create, :edit, :update]
+  plug :load_neighborhoods when action in [:new, :create, :edit, :update]
+  plug :load_languages when action in [:new, :create, :edit, :update]
+
   def index(conn, _params) do
     posts = Blog.list_posts()
     render(conn, "index.html", posts: posts)
@@ -11,14 +15,11 @@ defmodule ElixirKidsWeb.PostController do
 
   def new(conn, _params) do
     changeset = Blog.change_post(%Post{})
-    categories = Blog.list_categories_select()
-    render(conn, "new.html", changeset: changeset, categories: categories)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
-    new_slug = Slug.slugify(post_params["title"])
-    new_post = Map.put(post_params, "slug", new_slug)
-    case Blog.create_post(new_post) do
+    case Blog.create_post(post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post created successfully.")
@@ -42,7 +43,6 @@ defmodule ElixirKidsWeb.PostController do
 
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Blog.get_post!(id)
-
     case Blog.update_post(post, post_params) do
       {:ok, post} ->
         conn
@@ -61,5 +61,20 @@ defmodule ElixirKidsWeb.PostController do
     conn
     |> put_flash(:info, "Post deleted successfully.")
     |> redirect(to: Routes.post_path(conn, :index))
+  end
+  
+  defp load_categories(conn, _) do
+    categories = Blog.list_categories_select()
+    assign(conn, :categories, categories)
+  end
+
+  defp load_neighborhoods(conn, _) do
+    neighborhoods = Blog.list_neighborhoods_select()
+    assign(conn, :neighborhoods, neighborhoods)
+  end
+
+  defp load_languages(conn, _) do
+    languages = %{"Norsk" => "no", "English" => "en"}
+    assign(conn, :languages, languages)
   end
 end

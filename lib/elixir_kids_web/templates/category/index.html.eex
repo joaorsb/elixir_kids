@@ -1,12 +1,14 @@
-<h1>Listing Categories</h1>
+<span><%= link "New Category", to: Routes.category_path(@conn, :new), class: "button is-primary is-outlined is-pulled-right"  %></span>
+<h1 class="is-size-3">Categories</h1>
 
-<table>
+<table class="table is-fullwidth">
   <thead>
     <tr>
       <th>Title</th>
       <th>Slug</th>
       <th>Type</th>
-
+      <th>Actions</th>
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -19,12 +21,14 @@
 
       <td>
         <span><%= link "Show", to: Routes.category_path(@conn, :show, category) %></span>
+      </td>
+      <td>
         <span><%= link "Edit", to: Routes.category_path(@conn, :edit, category) %></span>
-        <span><%= link "Delete", to: Routes.category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+      <td>
+        <span><%= link "Delete", to: Routes.category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"], class: "button is-danger is-small is-outlined" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Category", to: Routes.category_path(@conn, :new) %></span>

@@ -15,9 +15,8 @@ defmodule ElixirKidsWeb.CategoryController do
   end
 
   def create(conn, %{"category" => category_params}) do
-    new_slug = Slug.slugify(category_params["title"])
-    new_category = Map.put(category_params, "slug", new_slug)
-    case Blog.create_category(new_category) do
+    
+    case Blog.create_category(category_params) do
       {:ok, category} ->
         conn
         |> put_flash(:info, "Category created successfully.")
@@ -41,9 +40,7 @@ defmodule ElixirKidsWeb.CategoryController do
 
   def update(conn, %{"id" => id, "category" => category_params}) do
     category = Blog.get_category!(id)
-    new_slug = Slug.slugify(category_params["title"])
-    new_category = Map.put(category_params, "slug", new_slug)
-    case Blog.update_category(category, new_category) do
+    case Blog.update_category(category, category_params) do
       {:ok, category} ->
         conn
         |> put_flash(:info, "Category updated successfully.")

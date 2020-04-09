@@ -1,0 +1,4 @@
+<div class="notification is-<%= @class %>">
+    <button class="delete"></button>
+    <%= @message %>
+</div>

@@ -1,5 +1,14 @@
-<h1>Edit Category</h1>
+<span>
+    <a href="<%= Routes.category_path(@conn, :index) %>" class="button is-link is-pulled-right" >
+        <span class="icon is-small">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Back</span>
+    </a>
+</span>
+<h1 class="is-size-3">
+    Edit Category
+</h1>
 
 <%= render "form.html", Map.put(assigns, :action, Routes.category_path(@conn, :update, @category)) %>
 
-<span><%= link "Back", to: Routes.category_path(@conn, :index) %></span>

@@ -6,18 +6,11 @@
   <% end %>
 
   <div class="field">
-    <label class="label"><%= label f, :title %></label>
-    <%= text_input f, :title, class: "input" %>
-    <%= error_tag f, :title %>
+    <label class="label"><%= label f, :name %></label>
+    <%= text_input f, :name, class: "input"  %>
+    <%= error_tag f, :name %>
   </div>
 
-  <div class="field">
-    <label class="label"><%= label f, :type%></label>
-    <div class="select">
-      <%= select f, :type, ["Free", "Paid"]  %>
-    </div>
-    <%= error_tag f, :type %>
-  </div>
 
   <div class="field">
     <div class="control">

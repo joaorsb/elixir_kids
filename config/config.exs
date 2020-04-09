@@ -29,3 +29,7 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
+
+# Google Maps API key
+config :google_maps,
+  api_key: "AIzaSyADaD5ZdjzHBTyNT4s5CkOe1B8KAk5pthw"

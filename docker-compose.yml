@@ -1,15 +1,11 @@
 version: '3'
 
-volumes:
-  tipster-postgres-data:
-    driver: local
-
 services:
   postgres:
     image: postgres:11
-    container_name: elixir_kids
+    container_name: ex-kids-postgres
     volumes:
-      - tipster-postgres-data:/var/lib/postgresql/data
+      - elixir-postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:

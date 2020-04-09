@@ -205,4 +205,67 @@ defmodule ElixirKids.BlogTest do
       assert %Ecto.Changeset{} = Blog.change_media(media)
     end
   end
+
+  describe "neighborhoods" do
+    alias ElixirKids.Blog.Neighborhood
+
+    @valid_attrs %{latitude: 120.5, longitude: 120.5, name: "some name"}
+    @update_attrs %{latitude: 456.7, longitude: 456.7, name: "some updated name"}
+    @invalid_attrs %{latitude: nil, longitude: nil, name: nil}
+
+    def neighborhood_fixture(attrs \\ %{}) do
+      {:ok, neighborhood} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Blog.create_neighborhood()
+
+      neighborhood
+    end
+
+    test "list_neighborhoods/0 returns all neighborhoods" do
+      neighborhood = neighborhood_fixture()
+      assert Blog.list_neighborhoods() == [neighborhood]
+    end
+
+    test "get_neighborhood!/1 returns the neighborhood with given id" do
+      neighborhood = neighborhood_fixture()
+      assert Blog.get_neighborhood!(neighborhood.id) == neighborhood
+    end
+
+    test "create_neighborhood/1 with valid data creates a neighborhood" do
+      assert {:ok, %Neighborhood{} = neighborhood} = Blog.create_neighborhood(@valid_attrs)
+      assert neighborhood.latitude == 120.5
+      assert neighborhood.longitude == 120.5
+      assert neighborhood.name == "some name"
+    end
+
+    test "create_neighborhood/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Blog.create_neighborhood(@invalid_attrs)
+    end
+
+    test "update_neighborhood/2 with valid data updates the neighborhood" do
+      neighborhood = neighborhood_fixture()
+      assert {:ok, %Neighborhood{} = neighborhood} = Blog.update_neighborhood(neighborhood, @update_attrs)
+      assert neighborhood.latitude == 456.7
+      assert neighborhood.longitude == 456.7
+      assert neighborhood.name == "some updated name"
+    end
+
+    test "update_neighborhood/2 with invalid data returns error changeset" do
+      neighborhood = neighborhood_fixture()
+      assert {:error, %Ecto.Changeset{}} = Blog.update_neighborhood(neighborhood, @invalid_attrs)
+      assert neighborhood == Blog.get_neighborhood!(neighborhood.id)
+    end
+
+    test "delete_neighborhood/1 deletes the neighborhood" do
+      neighborhood = neighborhood_fixture()
+      assert {:ok, %Neighborhood{}} = Blog.delete_neighborhood(neighborhood)
+      assert_raise Ecto.NoResultsError, fn -> Blog.get_neighborhood!(neighborhood.id) end
+    end
+
+    test "change_neighborhood/1 returns a neighborhood changeset" do
+      neighborhood = neighborhood_fixture()
+      assert %Ecto.Changeset{} = Blog.change_neighborhood(neighborhood)
+    end
+  end
 end

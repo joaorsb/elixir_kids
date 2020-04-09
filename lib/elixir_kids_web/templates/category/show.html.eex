@@ -18,6 +18,21 @@
   </li>
 
 </ul>
-
-<span><%= link "Edit", to: Routes.category_path(@conn, :edit, @category) %></span>
-<span><%= link "Back", to: Routes.category_path(@conn, :index) %></span>
+<div class="field is-grouped is-pulled-right">
+  <p class="control">
+    <a href="<%= Routes.category_path(@conn, :edit, @category) %>" class="button is-success is-outlined">
+      <span class="icon is-small">
+        <i class="fas fa-edit"></i>
+      </span>
+      <span>Edit</span>
+    </a>
+  </p>
+  <p class="control">
+    <a href="<%= Routes.category_path(@conn, :index) %>" class="button is-warning">
+      <span class="icon is-small">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+      <span>Back</span>
+    </a>
+  </p>
+</div>

@@ -1,58 +1,63 @@
-<h1>Show Post</h1>
+  <h1>Show Post</h1>
 
-<ul>
+  <ul>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
+    <li>
+      <strong>Title:</strong>
+      <%= @post.title %>
+    </li>
 
-  <li>
-    <strong>Description:</strong>
-    <%= @post.description %>
-  </li>
+    <li>
+      <strong>Description:</strong>
+      <%= @post.description %>
+    </li>
 
-  <li>
-    <strong>Address:</strong>
-    <%= @post.address %>
-  </li>
+    <li>
+      <strong>Address:</strong>
+      <%= @post.address %>
+    </li>
 
-  <li>
-    <strong>Image name:</strong>
-    <%= @post.image_name %>
-  </li>
+    <li>
+      <strong>Latitude:</strong>
+      <%= @post.lat %>
+    </li>
 
-  <li>
-    <strong>Lat:</strong>
-    <%= @post.lat %>
-  </li>
+    <li>
+      <strong>Longitude:</strong>
+      <%= @post.lng %>
+    </li>
 
-  <li>
-    <strong>Lng:</strong>
-    <%= @post.lng %>
-  </li>
+    <li>
+      <strong>Site url:</strong>
+      <%= @post.site_url %>
+    </li>
 
-  <li>
-    <strong>Neighborhood:</strong>
-    <%= @post.neighborhood %>
-  </li>
+    <li>
+      <strong>Slug:</strong>
+      <%= @post.slug %>
+    </li>
 
-  <li>
-    <strong>Site url:</strong>
-    <%= @post.site_url %>
-  </li>
+    <li>
+      <strong>Language:</strong>
+      <%= @post.language %>
+    </li>
 
-  <li>
-    <strong>Slug:</strong>
-    <%= @post.slug %>
-  </li>
-
-  <li>
-    <strong>Language:</strong>
-    <%= @post.language %>
-  </li>
-
-</ul>
-
-<span><%= link "Edit", to: Routes.post_path(@conn, :edit, @post) %></span>
-<span><%= link "Back", to: Routes.post_path(@conn, :index) %></span>
+  </ul>
+  <div class="field is-grouped is-pulled-right">
+    <p class="control">
+      <a href="<%= Routes.post_path(@conn, :edit, @post) %>" class="button is-success is-outlined">
+        <span class="icon is-small">
+          <i class="fas fa-edit"></i>
+        </span>
+        <span>Edit</span>
+      </a>
+    </p>
+    <p class="control">
+      <a href="<%= Routes.post_path(@conn, :index) %>" class="button is-warning">
+        <span class="icon is-small">
+          <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Back</span>
+      </a>
+    </p>
+  </div>

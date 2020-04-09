@@ -17,8 +17,18 @@ defmodule ElixirKids.Blog.Category do
   @doc false
   def changeset(category, attrs) do
     category
-    |> cast(attrs, [:title, :slug, :type])
-    |> validate_required([:title, :slug, :type])
+    |> cast(attrs, [:title, :type])
+    |> validate_required([:title, :type])
     |> Ecto.Changeset.validate_inclusion(:type, @types)
+    |> create_slug
+  end
+
+  defp create_slug(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{title: title}} ->
+        put_change(changeset, :slug, Slug.slugify(title))
+      _ ->
+        changeset
+    end
   end
 end

@@ -1,0 +1,38 @@
+<h1>Show Neighborhood</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @neighborhood.name %>
+  </li>
+
+  <li>
+    <strong>Latitude:</strong>
+    <%= @neighborhood.latitude %>
+  </li>
+
+  <li>
+    <strong>Longitude:</strong>
+    <%= @neighborhood.longitude %>
+  </li>
+
+</ul>
+<div class="field is-grouped is-pulled-right">
+  <p class="control">
+    <a href="<%= Routes.neighborhood_path(@conn, :edit, @neighborhood) %>" class="button is-success is-outlined">
+      <span class="icon is-small">
+        <i class="fas fa-edit"></i>
+      </span>
+      <span>Edit</span>
+    </a>
+  </p>
+  <p class="control">
+    <a href="<%= Routes.neighborhood_path(@conn, :index) %>" class="button is-warning">
+      <span class="icon is-small">
+        <i class="fas fa-arrow-left"></i>
+      </span>
+      <span>Back</span>
+    </a>
+  </p>
+</div>

@@ -1,0 +1,28 @@
+<aside class="menu">
+    <p class="menu-label">
+        Gratis
+    </p>
+    <ul class="menu-list">
+        <%= for f_cat <- @free_categories do %>
+            <li><a href="/"><%= elem(f_cat, 0) %></a></li>
+        <% end %>
+    </ul>
+    
+    <p class="menu-label">
+        Betaling
+    </p>
+    <ul class="menu-list">
+        <%= for category <- @paid_categories do %>
+            <li><a href="/"><%= elem(category, 0) %></a></li>
+        <% end %>
+    </ul>
+    
+    <p class="menu-label">
+        Strøk/Bydel
+    </p>
+    <ul class="menu-list">
+        <%= for neighborhood <- @neighborhoods do %>
+            <li><a href="/"><%= neighborhood.name %></a></li>
+        <% end %>
+    </ul>
+</aside>

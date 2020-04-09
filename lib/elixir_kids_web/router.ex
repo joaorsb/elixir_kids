@@ -21,6 +21,7 @@ defmodule ElixirKidsWeb.Router do
     resources "/categories", CategoryController
     resources "/posts", PostController
     resources "/medias", MediaController
+    resources "/neighborhoods", NeighborhoodController
   end
 
   # Other scopes may use custom stacks.
