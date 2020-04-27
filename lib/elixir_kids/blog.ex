@@ -5,8 +5,8 @@ defmodule ElixirKids.Blog do
 
   import Ecto.Query, warn: false
   alias ElixirKids.Repo
-
   alias ElixirKids.Blog.Category
+  alias ElixirKids.PubSub
 
   @doc """
   Returns the list of categories.
@@ -348,6 +348,15 @@ defmodule ElixirKids.Blog do
     Repo.all(Neighborhood)
   end
 
+  def list_neighborhoods(current_page, per_page) do
+    Repo.all(
+      from n in Neighborhood,
+        order_by: [asc: n.id],
+        offset: ^((current_page - 1) * per_page),
+        limit: ^per_page
+    )
+  end
+
   @doc """
   Gets a single neighborhood.
 
@@ -380,6 +389,8 @@ defmodule ElixirKids.Blog do
     %Neighborhood{}
     |> Neighborhood.changeset(attrs)
     |> Repo.insert()
+    |> PubSub.broadcast_neighborhoods(:create)
+
   end
 
   @doc """
@@ -398,6 +409,7 @@ defmodule ElixirKids.Blog do
     neighborhood
     |> Neighborhood.changeset(attrs)
     |> Repo.update()
+    |> PubSub.broadcast_neighborhoods(:update)
   end
 
   @doc """
@@ -414,6 +426,7 @@ defmodule ElixirKids.Blog do
   """
   def delete_neighborhood(%Neighborhood{} = neighborhood) do
     Repo.delete(neighborhood)
+    |> PubSub.broadcast_neighborhoods(:delete)
   end
 
   @doc """
@@ -425,8 +438,8 @@ defmodule ElixirKids.Blog do
       %Ecto.Changeset{source: %Neighborhood{}}
 
   """
-  def change_neighborhood(%Neighborhood{} = neighborhood) do
-    Neighborhood.changeset(neighborhood, %{})
+  def change_neighborhood(neighborhood, attrs \\ %{}) do
+    Neighborhood.changeset(neighborhood, attrs)
   end
 
   @doc """

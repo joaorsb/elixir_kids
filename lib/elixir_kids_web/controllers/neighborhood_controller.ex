@@ -3,6 +3,7 @@ defmodule ElixirKidsWeb.NeighborhoodController do
 
   alias ElixirKids.Blog
   alias ElixirKids.Blog.Neighborhood
+  alias ElixirKids.PubSub
 
   def index(conn, _params) do
     neighborhoods = Blog.list_neighborhoods()
@@ -13,9 +14,9 @@ defmodule ElixirKidsWeb.NeighborhoodController do
     changeset = Blog.change_neighborhood(%Neighborhood{})
     render(conn, "new.html", changeset: changeset)
   end
-  
+
   def create(conn, %{"neighborhood" => neighborhood_params}) do
-    
+
     case Blog.create_neighborhood(neighborhood_params) do
       {:ok, neighborhood} ->
         conn
@@ -40,7 +41,7 @@ defmodule ElixirKidsWeb.NeighborhoodController do
 
   def update(conn, %{"id" => id, "neighborhood" => neighborhood_params}) do
     neighborhood = Blog.get_neighborhood!(id)
-    
+
     case Blog.update_neighborhood(neighborhood, neighborhood_params) do
       {:ok, neighborhood} ->
         conn

@@ -1,0 +1,28 @@
+<a href="<%= Routes.live_path(@socket, ElixirKidsWeb.NeighborhoodLive.Index) %>" class="button is-link is-pulled-right" >
+  <span class="icon is-small">
+      <i class="fas fa-arrow-left"></i>
+  </span>
+  <span>Back</span>
+</a>
+<div class="box">
+  <h1 class="is-size-3">
+    Neighborhood #<%= @neighborhood.id %>
+  </h1>
+  <ul>
+    <li>
+      <strong>Name:</strong>
+      <%= @neighborhood.name %>
+    </li>
+
+    <li>
+      <strong>Latitude:</strong>
+      <%= @neighborhood.latitude %>
+    </li>
+
+    <li>
+      <strong>Longitude:</strong>
+      <%= @neighborhood.longitude %>
+    </li>
+
+  </ul>
+</div>

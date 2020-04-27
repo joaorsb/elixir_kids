@@ -1,0 +1,15 @@
+<table class="table is-striped is-fullwidth">
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%= for post <- @posts do %>
+      <tr>
+        <td><%= post.title %></td>
+        
+      </tr>
+  <% end %>
+  </tbody>
+</table>

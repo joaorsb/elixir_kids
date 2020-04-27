@@ -10,6 +10,10 @@ defmodule ElixirKidsWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :live_layouts do
+    plug :put_root_layout, {ElixirKidsWeb.LayoutView, :live }
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -22,6 +26,15 @@ defmodule ElixirKidsWeb.Router do
     resources "/posts", PostController
     resources "/medias", MediaController
     resources "/neighborhoods", NeighborhoodController
+  end
+
+  scope "/live", ElixirKidsWeb do
+    pipe_through [:browser, :live_layouts]
+
+    live "/neighborhoods/new", NeighborhoodLive.New
+    live "/neighborhoods/:id", NeighborhoodLive.Show
+    live "/neighborhoods/:id/edit", NeighborhoodLive.Edit
+    live "/neighborhoods", NeighborhoodLive.Index
   end
 
   # Other scopes may use custom stacks.

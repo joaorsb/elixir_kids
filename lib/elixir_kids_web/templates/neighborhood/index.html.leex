@@ -1,0 +1,58 @@
+<span>
+  <%= link "Add Neighborhood", 
+    to: Routes.live_path(@socket, ElixirKidsWeb.NeighborhoodLive.New),
+    class: "button is-primary is-outlined is-pulled-right" 
+  %>
+</span>
+<h1 class="is-size-3">Neighborhoods</h1>
+  
+<table class="table is-striped is-fullwidth" phx-keydown-window="keydown" phx-throttle="500">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for neighborhood <- @neighborhoods do %>
+      <tr>
+        <td><%= neighborhood.name %></td>
+        <td><%= neighborhood.latitude %></td>
+        <td><%= neighborhood.longitude %></td>
+
+        <td>
+          <div class="is-pulled-right">
+            <span>
+              <%= link "Show", 
+                to: Routes.live_path(@socket, ElixirKidsWeb.NeighborhoodLive.Show, neighborhood.id, []),
+                class: "button is-info is-small is-outlined" 
+              %>
+            </span>
+            <span>          
+              <%= link "Edit", 
+                to: Routes.live_path(@socket, ElixirKidsWeb.NeighborhoodLive.Edit, neighborhood.id, []),
+                class: "button is-warning is-small " 
+              %>
+            </span>
+            <span>
+              <%= link "Delete", to: "#",
+                phx_click: "delete_neighborhood",
+                phx_value_id: neighborhood.id,
+                data: [confirm: "Are you sure?"], 
+                class: "button is-danger is-small is-outlined"
+              %>
+            </span>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= if @page > 1 do %>
+  <span><%= live_patch "prev", to: Routes.live_path(@socket,  ElixirKidsWeb.NeighborhoodLive.Index, page: @page - 1) %></span>
+<% end %>
+<span><%= live_patch "next", to: Routes.live_path(@socket, ElixirKidsWeb.NeighborhoodLive.Index, page: @page + 1) %></span>
+<br/>
